@@ -1,0 +1,8 @@
+%implements cgirblk_s0_b1_Outputs "C"
+
+%function Outputs(block, system) Output
+
+/* Outport: '<Root>/Out1' incorporates:
+ *  Gain: '<Root>/Gain' */
+%<SLibCGIROutPortSignal(0, "", "", 0)> = %<LibBlockInputSignal(0, "", "", 0)> * %<SLibCGIRBlockParameter(0, "", "", 0)>;
+%endfunction

@@ -1,0 +1,19 @@
+%implements cgirblk_s0_b58_Outputs "C"
+
+%function Outputs(block, system) Output
+%if !LibBlockOutputSignalIsExpr(0)
+
+/* Gain: '<S4>/Gain1' incorporates:
+ *  Gain: '<S4>/Gain' */
+%<LibBlockAssignOutputSignal(0, "", "", 0, "%<LibBlockInputSignal(0, "", "", 0)> * %<SLibCGIRBlockParameter(0, "", "", 0)> * %<SLibCGIRBlockParameter(1, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 1, "%<LibBlockInputSignal(1, "", "", 1)> * %<SLibCGIRBlockParameter(1, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 2, "%<LibBlockInputSignal(1, "", "", 2)> * %<SLibCGIRBlockParameter(1, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 3, "%<LibBlockInputSignal(1, "", "", 3)> * %<SLibCGIRBlockParameter(1, "", "", 0)>")>\
+%endif
+%endfunction

@@ -1,0 +1,20 @@
+%implements cgirblk_s0_b2_Outputs "C"
+
+%function Outputs(block, system) Output
+%if !LibBlockOutputSignalIsExpr(0)
+
+/* SignalConversion: '<Root>/TmpHiddenBuffer_Feeding_S-Function Builder_AtInput1' incorporates:
+ *  Constant: '<Root>/Constant'
+ */
+%<LibBlockAssignOutputSignal(0, "", "", 0, "%<LibBlockInputSignal(0, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 1, "%<LibBlockInputSignal(0, "", "", 1)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 2, "%<LibBlockInputSignal(0, "", "", 2)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 3, "%<LibBlockInputSignal(0, "", "", 3)>")>\
+%endif
+%endfunction

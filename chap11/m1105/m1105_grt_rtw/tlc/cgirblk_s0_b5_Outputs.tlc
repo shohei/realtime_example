@@ -1,0 +1,9 @@
+%implements cgirblk_s0_b5_Outputs "C"
+
+%function Outputs(block, system) Output
+%if !LibBlockOutputSignalIsExpr(0)
+
+/* Constant: '<Root>/Constant1' */
+%<LibBlockAssignOutputSignal(0, "", "", 0, "%<SLibCGIRBlockParameter(0, "", "", 0)>")>\
+%endif
+%endfunction

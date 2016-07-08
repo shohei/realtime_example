@@ -1,0 +1,34 @@
+%implements cgirblk_s0_b4_BlockOutputComment "C"
+
+%function BlockOutputComment(block, portIdx) void 
+    %assign tmpBuf = ""
+    %switch portIdx
+      %case 0
+         %openfile tmpBuf
+ *  SignalConversion: '<S5>/TmpHiddenBuffer_Feeding_Matrix Concatenation_AtInput1'
+ *  Sum: '<S5>/Sum'
+ *  Sum: '<S5>/Add'
+ *  Sum: '<S5>/Add1'\
+         %closefile tmpBuf
+         %return tmpBuf
+      %case 1
+         %openfile tmpBuf
+ *  SignalConversion: '<S5>/TmpHiddenBuffer_Feeding_Matrix Concatenation_AtInput2'
+ *  Sum: '<S5>/Add2'
+ *  Sum: '<S5>/Sum1'
+ *  Sum: '<S5>/Add3'\
+         %closefile tmpBuf
+         %return tmpBuf
+      %case 2
+         %openfile tmpBuf
+ *  SignalConversion: '<S5>/TmpHiddenBuffer_Feeding_Matrix Concatenation_AtInput3'
+ *  Sum: '<S5>/Add4'
+ *  Sum: '<S5>/Add5'
+ *  Sum: '<S5>/Sum2'\
+         %closefile tmpBuf
+         %return tmpBuf
+    %default
+      %assign errTxt = "No expression comment on port %<portIdx>"
+      %<LibBlockReportError(block,errTxt)>
+  %endswitch
+%endfunction

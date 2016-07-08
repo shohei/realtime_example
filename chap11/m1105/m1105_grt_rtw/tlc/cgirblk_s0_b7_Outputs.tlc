@@ -1,0 +1,18 @@
+%implements cgirblk_s0_b7_Outputs "C"
+
+%function Outputs(block, system) Output
+%if !LibBlockOutputSignalIsExpr(0)
+
+/* Gain: '<Root>/Gain1' incorporates:
+ *  Gain: '<Root>/Gain2'
+ *  Sum: '<Root>/Sum1'
+ *  Sum: '<Root>/Sum' */
+%<LibBlockAssignOutputSignal(0, "", "", 0, "(%<LibBlockInputSignal(2, "", "", 0)> - (%<LibBlockInputSignal(1, "", "", 0)> + %<LibBlockInputSignal(0, "", "", 0)> * %<SLibCGIRBlockParameter(0, "", "", 0)>)) * %<SLibCGIRBlockParameter(1, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 1, "(%<LibBlockInputSignal(2, "", "", 1)> - (%<LibBlockInputSignal(1, "", "", 1)> + %<LibBlockInputSignal(0, "", "", 1)> * %<SLibCGIRBlockParameter(0, "", "", 0)>)) * %<SLibCGIRBlockParameter(1, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 2, "(%<LibBlockInputSignal(2, "", "", 2)> - (%<LibBlockInputSignal(1, "", "", 2)> + %<LibBlockInputSignal(0, "", "", 2)> * %<SLibCGIRBlockParameter(0, "", "", 0)>)) * %<SLibCGIRBlockParameter(1, "", "", 0)>")>\
+%endif
+%endfunction

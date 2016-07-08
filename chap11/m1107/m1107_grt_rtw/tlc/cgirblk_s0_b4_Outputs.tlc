@@ -1,0 +1,90 @@
+%implements cgirblk_s0_b4_Outputs "C"
+
+%function Outputs(block, system) Output
+%<SLibCGIRAccessLocalVar(7)> %% %<tLocalBlockIO>_Product4
+%<SLibCGIRAccessLocalVar(15)> %% %<tLocalBlockIO>_Product6
+%<SLibCGIRAccessLocalVar(16)> %% %<tLocalBlockIO>_Product1_n
+%<SLibCGIRAccessLocalVar(9)> %% %<tLocalBlockIO>_Product5
+%<SLibCGIRAccessLocalVar(10)> %% %<tLocalBlockIO>_Product2
+%<SLibCGIRAccessLocalVar(6)> %% %<tLocalBlockIO>_Product3
+
+{
+real_T Gain_h_1;
+real_T Product_e_1;
+real_T Product_e_2;
+real_T Gain_h_0;
+real_T Product_e_0;
+
+/* Gain: '<S5>/Gain' incorporates:
+ *  Product: '<S3>/Divide' */
+Gain_h_0 = %<LibBlockInputSignal(0, "", "", 0)> / %<LibBlockInputSignal(1, "", "", 0)> * %<SLibCGIRBlockParameter(0, "", "", 0)>;
+Gain_h_1 = %<LibBlockInputSignal(0, "", "", 1)> / %<LibBlockInputSignal(1, "", "", 0)> * %<SLibCGIRBlockParameter(0, "", "", 0)>;
+%<tLocalBlockIO>_Product6 = %<LibBlockInputSignal(0, "", "", 2)> / %<LibBlockInputSignal(1, "", "", 0)> * %<SLibCGIRBlockParameter(0, "", "", 0)>;
+%<tLocalBlockIO>_Product1_n = %<LibBlockInputSignal(0, "", "", 3)> / %<LibBlockInputSignal(1, "", "", 0)> * %<SLibCGIRBlockParameter(0, "", "", 0)>;
+
+/* Product: '<S5>/Product' */
+Product_e_0 = Gain_h_1 * Gain_h_1;
+Product_e_1 = %<tLocalBlockIO>_Product6 * %<tLocalBlockIO>_Product6;
+Product_e_2 = %<tLocalBlockIO>_Product1_n * %<tLocalBlockIO>_Product1_n;
+
+/* Product: '<S5>/Product3' */
+%<tLocalBlockIO>_Product3 = Gain_h_0 * %<tLocalBlockIO>_Product1_n;
+
+/* Product: '<S5>/Product4' */
+%<tLocalBlockIO>_Product4 = %<tLocalBlockIO>_Product6 * Gain_h_1;
+
+/* Product: '<S5>/Product5' */
+%<tLocalBlockIO>_Product5 = %<tLocalBlockIO>_Product1_n * Gain_h_1;
+
+/* Product: '<S5>/Product2' */
+%<tLocalBlockIO>_Product2 = Gain_h_0 * %<tLocalBlockIO>_Product6;
+
+/* SignalConversion: '<S5>/TmpHiddenBuffer_Feeding_Matrix Concatenation_AtInput1' incorporates:
+ *  Sum: '<S5>/Sum'
+ *  Sum: '<S5>/Add'
+ *  Sum: '<S5>/Add1'
+ *  Constant: '<S5>/Constant1'
+ */
+%<LibBlockAssignOutputSignal(0, "", "", 0, "(%<LibBlockInputSignal(2, "", "", 0)> - Product_e_1) - Product_e_2")>\
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 1, "%<tLocalBlockIO>_Product3 + %<tLocalBlockIO>_Product4")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 2, "%<tLocalBlockIO>_Product5 - %<tLocalBlockIO>_Product2")>\
+%endif
+
+/* Product: '<S5>/Product6' */
+%<tLocalBlockIO>_Product6 *= %<tLocalBlockIO>_Product1_n;
+
+/* Product: '<S5>/Product1' */
+%<tLocalBlockIO>_Product1_n = Gain_h_0 * Gain_h_1;
+%if !LibBlockOutputSignalIsExpr(1)
+
+/* SignalConversion: '<S5>/TmpHiddenBuffer_Feeding_Matrix Concatenation_AtInput2' incorporates:
+ *  Sum: '<S5>/Add2'
+ *  Sum: '<S5>/Sum1'
+ *  Sum: '<S5>/Add3'
+ *  Constant: '<S5>/Constant1'
+ */
+%<LibBlockAssignOutputSignal(1, "", "", 0, "%<tLocalBlockIO>_Product4 - %<tLocalBlockIO>_Product3")>\
+%endif
+%<LibBlockAssignOutputSignal(1, "", "", 1, "(%<LibBlockInputSignal(2, "", "", 0)> - Product_e_0) - Product_e_2")>\
+%if !LibBlockOutputSignalIsExpr(1)
+%<LibBlockAssignOutputSignal(1, "", "", 2, "%<tLocalBlockIO>_Product6 + %<tLocalBlockIO>_Product1_n")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(2)
+
+/* SignalConversion: '<S5>/TmpHiddenBuffer_Feeding_Matrix Concatenation_AtInput3' incorporates:
+ *  Sum: '<S5>/Add4'
+ *  Sum: '<S5>/Add5'
+ *  Sum: '<S5>/Sum2'
+ *  Constant: '<S5>/Constant1'
+ */
+%<LibBlockAssignOutputSignal(2, "", "", 0, "%<tLocalBlockIO>_Product5 + %<tLocalBlockIO>_Product2")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(2)
+%<LibBlockAssignOutputSignal(2, "", "", 1, "%<tLocalBlockIO>_Product6 - %<tLocalBlockIO>_Product1_n")>\
+%endif
+%<LibBlockAssignOutputSignal(2, "", "", 2, "(%<LibBlockInputSignal(2, "", "", 0)> - Product_e_0) - Product_e_1")>\
+}
+%endfunction

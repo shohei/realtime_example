@@ -1,0 +1,15 @@
+%implements cgirblk_s0_b2_Outputs "C"
+
+%function Outputs(block, system) Output
+%if !LibBlockOutputSignalIsExpr(0)
+
+/* Gain: '<Root>/Gain' */
+%<LibBlockAssignOutputSignal(0, "", "", 0, "%<LibBlockInputSignal(0, "", "", 0)> * %<SLibCGIRBlockParameter(0, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 1, "%<LibBlockInputSignal(0, "", "", 1)> * %<SLibCGIRBlockParameter(0, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 2, "%<LibBlockInputSignal(0, "", "", 2)> * %<SLibCGIRBlockParameter(0, "", "", 0)>")>\
+%endif
+%endfunction

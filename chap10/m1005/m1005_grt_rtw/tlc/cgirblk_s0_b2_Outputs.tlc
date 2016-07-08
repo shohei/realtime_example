@@ -1,0 +1,7 @@
+%implements cgirblk_s0_b2_Outputs "C"
+
+%function Outputs(block, system) Output
+
+/* Outport: '<Root>/Out1' */
+%<SLibCGIROutPortSignal(0, "", "", 0)> = %<LibBlockInputSignal(0, "", "", 0)>;
+%endfunction

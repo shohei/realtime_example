@@ -1,0 +1,46 @@
+%implements cgirblk_s0_b47_Outputs "C"
+
+%function Outputs(block, system) Output
+%if !LibBlockOutputSignalIsExpr(0)
+
+/* SignalConversion: '<S6>/TmpHiddenBuffer_Feeding_Matrix Concatenation_AtInput1' incorporates:
+ *  Gain: '<S6>/Gain'
+ *  Constant: '<S6>/Constant1'
+ */
+%<LibBlockAssignOutputSignal(0, "", "", 0, "%<LibBlockInputSignal(1, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 1, "%<LibBlockInputSignal(1, "", "", 1)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(0)
+%<LibBlockAssignOutputSignal(0, "", "", 2, "%<LibBlockInputSignal(0, "", "", 0)> * %<SLibCGIRBlockParameter(0, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(1)
+
+/* SignalConversion: '<S6>/TmpHiddenBuffer_Feeding_Matrix Concatenation_AtInput2' incorporates:
+ *  Gain: '<S6>/Gain1'
+ *  Constant: '<S6>/Constant1'
+ */
+%<LibBlockAssignOutputSignal(1, "", "", 0, "%<LibBlockInputSignal(2, "", "", 0)> * %<SLibCGIRBlockParameter(1, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(1)
+%<LibBlockAssignOutputSignal(1, "", "", 1, "%<LibBlockInputSignal(3, "", "", 1)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(1)
+%<LibBlockAssignOutputSignal(1, "", "", 2, "%<LibBlockInputSignal(3, "", "", 2)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(2)
+
+/* SignalConversion: '<S6>/TmpHiddenBuffer_Feeding_Matrix Concatenation_AtInput3' incorporates:
+ *  Gain: '<S6>/Gain2'
+ *  Constant: '<S6>/Constant1'
+ */
+%<LibBlockAssignOutputSignal(2, "", "", 0, "%<LibBlockInputSignal(5, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(2)
+%<LibBlockAssignOutputSignal(2, "", "", 1, "%<LibBlockInputSignal(4, "", "", 0)> * %<SLibCGIRBlockParameter(2, "", "", 0)>")>\
+%endif
+%if !LibBlockOutputSignalIsExpr(2)
+%<LibBlockAssignOutputSignal(2, "", "", 2, "%<LibBlockInputSignal(5, "", "", 2)>")>\
+%endif
+%endfunction

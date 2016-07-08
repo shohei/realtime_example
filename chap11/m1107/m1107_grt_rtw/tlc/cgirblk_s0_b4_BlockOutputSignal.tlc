@@ -1,0 +1,18 @@
+%implements cgirblk_s0_b4_BlockOutputSignal "C"
+
+%function BlockOutputSignal(block,system,portIdx,ucv,lcv,idx,retType) void
+  %if retType == "Signal"
+    %switch portIdx
+      %case 0
+         %return "(%<tLocalBlockIO>_Product5 - %<tLocalBlockIO>_Product2)"
+      %case 1
+         %return "(%<tLocalBlockIO>_Product6 + %<tLocalBlockIO>_Product1_n)"
+      %case 2
+         %return "(%<tLocalBlockIO>_Product6 - %<tLocalBlockIO>_Product1_n)"
+    %default
+      %assign errTxt = "No expression on port %<portIdx>"
+      %<LibBlockReportError(block,errTxt)>
+  %endswitch
+  %else
+  %endif
+%endfunction
